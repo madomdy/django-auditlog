@@ -31,5 +31,6 @@ class LogEntryAdmin(admin.ModelAdmin, LogEntryAdminMixin):
     def has_change_permission(self, request, obj=None):
         return False
 
-    def has_delete_permission(self, request, obj=None):
-        return False
+    def get_queryset(self, request):
+        self.request = request
+        return super().get_queryset(request=request)
